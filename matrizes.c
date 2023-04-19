@@ -29,7 +29,7 @@ int main()
       scanf("%d", &matriz2[i][j]);
     }
   }
-  // realiza a operação inserida
+
   if (operacao == '+')
   {
     for (i = 0; i < linhas; i++)
