@@ -9,7 +9,6 @@ int main()
   printf("Quantas linhas você deseja informar para calcular o fibonacci? ");
   scanf("%d", &linhas);
 
-  // k, 1 ≤ k ≤ 10
   if (linhas < 1 || linhas > 10)
   {
     printf("O número de linhas deve ser entre 1 e 10");
