@@ -1,0 +1,8 @@
+*.dSYM/
+*.o
+*.out
+calculadora
+fibonacci
+halley
+matrizes
+primos

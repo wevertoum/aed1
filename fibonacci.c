@@ -33,7 +33,8 @@ int main()
 
   for (i = 0; i < linhas; i++)
   {
-    int resultado = fibonacci(numeros[i]);
+    int resultado = 0;
+    resultado = fibonacci(numeros[i]);
     printf("O número de Fibonacci de %d é %d\n", numeros[i], resultado);
   }
 
