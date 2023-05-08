@@ -7,10 +7,6 @@
 void dancing_sentence(char texto[MAX_LEN + 1])
 {
   int i;
-  if (texto[strlen(texto) - 1] == '\n')
-  {
-    texto[strlen(texto) - 1] = '\0';
-  }
   for (i = 0; i < strlen(texto); i++)
   {
     if (i % 2 == 0)
@@ -22,7 +18,6 @@ void dancing_sentence(char texto[MAX_LEN + 1])
       texto[i] = tolower(texto[i]);
     }
   }
-  printf("%s\n", texto);
 }
 
 int main()
