@@ -1,19 +1,21 @@
 #include <stdio.h>
 
-void reverse(int numero)
+void reverte_numero(int n)
 {
-    if(numero>0){
-        if(numero%10!=0){
-            printf("%d",numero%10);
+    if (n > 0)
+    {
+        if (n % 10 != 0)
+        {
+            printf("%d", n % 10);
         }
-        reverse(numero/10);
+        reverte_numero(n / 10);
     }
 }
 
 int main()
 {
-    int numero;
-    scanf("%d", &numero);
-    reverse(numero);
+    int valor;
+    scanf("%d", &valor);
+    reverte_numero(valor);
     return 0;
 }
