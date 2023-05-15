@@ -1,11 +1,11 @@
 #include <stdio.h>
 
-void imprime_numeros(int num, int counter)
+void imprime_valores(int n, int c)
 {
-    if (counter <= num)
+    if (c <= n)
     {
-        printf("%d ", counter++);
-        imprime_numeros(num, counter);
+        printf("%d ", c++);
+        imprime_valores(n, c);
     }
 }
 
@@ -13,6 +13,6 @@ int main()
 {
     int num, counter = 1;
     scanf("%d", &num);
-    imprime_numeros(num, counter);
+    imprime_valores(num, counter);
     return 0;
 }
