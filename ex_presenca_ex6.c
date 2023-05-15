@@ -1,20 +1,21 @@
 #include <stdio.h>
 
-#include <stdio.h>
-
-void torre_hanoi(int discos, char origem, char auxiliar, char destino) {
-    if (discos == 1) {
-        printf("(%c, %c)\n", origem, destino);
+void tower_of_hanoi(int disks, char source, char auxiliary, char destination)
+{
+    if (disks == 1)
+    {
+        printf("(%c, %c)\n", source, destination);
         return;
     }
-    torre_hanoi(discos - 1, origem, destino, auxiliar);
-    printf("(%c, %c)\n", origem, destino);
-    torre_hanoi(discos - 1, auxiliar, origem, destino);
+    tower_of_hanoi(disks - 1, source, destination, auxiliary);
+    printf("(%c, %c)\n", source, destination);
+    tower_of_hanoi(disks - 1, auxiliary, source, destination);
 }
 
-int main() {
-    int discos;
-    scanf("%d",&discos);
-    torre_hanoi(discos, 'O', 'A', 'D');
+int main()
+{
+    int disks;
+    scanf("%d", &disks);
+    tower_of_hanoi(disks, 'O', 'A', 'D');
     return 0;
 }
