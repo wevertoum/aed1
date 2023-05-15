@@ -1,25 +1,22 @@
 #include <stdio.h>
 
-int fat_duplo(int n)
+int fatorial_duplo(int n)
 {
-    if (n < 1)
+    if (n <= 1)
     {
         return 1;
     }
-    if ((n % 2))
+    if (n % 2 == 0)
     {
-        return n * fat_duplo(n - 1);
+        n--;
     }
-    else
-    {
-        return fat_duplo(n - 1);
-    }
+    return n * fatorial_duplo(n - 2);
 }
 
 int main()
 {
-    int numero;
-    scanf("%d", &numero);
-    printf("%d", fat_duplo(numero));
+    int n;
+    scanf("%d", &n);
+    printf("%d\n", fatorial_duplo(n));
     return 0;
 }
