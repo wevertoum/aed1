@@ -23,7 +23,8 @@ void destroiConjunto(Conjunto *conjunto)
 
 int pertenceConjunto(Conjunto *conjunto, int elemento)
 {
-  for (int i = 0; i < conjunto->tamanho; i++)
+  int i;
+  for (i = 0; i < conjunto->tamanho; i++)
   {
     if (conjunto->elementos[i] == elemento)
     {
@@ -39,17 +40,19 @@ Conjunto *uniaoConjuntos(Conjunto *conjunto1, Conjunto *conjunto2)
   Conjunto *uniao = criaConjunto(tamanhoUniao);
 
   int index = 0;
-  for (int i = 0; i < conjunto1->tamanho; i++)
+  int i;
+  for (i = 0; i < conjunto1->tamanho; i++)
   {
     uniao->elementos[index] = conjunto1->elementos[i];
     index++;
   }
 
-  for (int i = 0; i < conjunto2->tamanho; i++)
+  int j;
+  for (j = 0; j < conjunto2->tamanho; j++)
   {
-    if (!pertenceConjunto(conjunto1, conjunto2->elementos[i]))
+    if (!pertenceConjunto(conjunto1, conjunto2->elementos[j]))
     {
-      uniao->elementos[index] = conjunto2->elementos[i];
+      uniao->elementos[index] = conjunto2->elementos[j];
       index++;
     }
   }
@@ -64,7 +67,8 @@ Conjunto *intersecaoConjuntos(Conjunto *conjunto1, Conjunto *conjunto2)
   int tamanhoIntersecao = 0;
   Conjunto *intersecao = criaConjunto(tamanhoIntersecao);
 
-  for (int i = 0; i < conjunto1->tamanho; i++)
+  int i;
+  for (i = 0; i < conjunto1->tamanho; i++)
   {
     if (pertenceConjunto(conjunto2, conjunto1->elementos[i]))
     {
@@ -85,7 +89,8 @@ int main()
   scanf("%d", &n1);
 
   Conjunto *conjunto1 = criaConjunto(n1);
-  for (int i = 0; i < n1; i++)
+  int i;
+  for (i = 0; i < n1; i++)
   {
     scanf("%d", &conjunto1->elementos[i]);
   }
@@ -93,15 +98,16 @@ int main()
   scanf("%d", &n2);
 
   Conjunto *conjunto2 = criaConjunto(n2);
-  for (int i = 0; i < n2; i++)
+  int j;
+  for (j = 0; j < n2; j++)
   {
-    scanf("%d", &conjunto2->elementos[i]);
+    scanf("%d", &conjunto2->elementos[j]);
   }
 
   int t;
   scanf("%d", &t);
 
-  for (int i = 0; i < t; i++)
+  for (i = 0; i < t; i++)
   {
     int operacao, elemento;
     scanf("%d", &operacao);
@@ -135,7 +141,7 @@ int main()
     case 3:
     {
       Conjunto *uniao = uniaoConjuntos(conjunto1, conjunto2);
-      for (int j = 0; j < uniao->tamanho; j++)
+      for (j = 0; j < uniao->tamanho; j++)
       {
         printf("%d ", uniao->elementos[j]);
       }
@@ -147,7 +153,7 @@ int main()
     case 4:
     {
       Conjunto *intersecao = intersecaoConjuntos(conjunto1, conjunto2);
-      for (int j = 0; j < intersecao->tamanho; j++)
+      for (j = 0; j < intersecao->tamanho; j++)
       {
         printf("%d ", intersecao->elementos[j]);
       }
