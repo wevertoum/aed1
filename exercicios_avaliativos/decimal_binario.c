@@ -11,6 +11,5 @@ int main() {
     int decimal;
     scanf("%d", &decimal);
     decimalParaBinario(decimal);
-    printf(decimal);
     return 0;
 }

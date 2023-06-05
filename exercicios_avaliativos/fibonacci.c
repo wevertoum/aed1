@@ -18,7 +18,7 @@ int main()
   scanf("%d", &n);
 
   int resultado = fibonacci(n);
-  printf("O %dº número da série de Fibonacci é: %d\n", n, resultado);
+  printf("%d\n", resultado);
 
   return 0;
 }
