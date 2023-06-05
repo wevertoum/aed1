@@ -1,0 +1,1 @@
+int somavaloresfunc(int a, int b);
