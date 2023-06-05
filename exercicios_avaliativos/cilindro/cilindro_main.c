@@ -13,10 +13,9 @@ int main(){
     scanf("%f", &raio);
 
     cilindro = cria_o_cilindro(raio, altura);
-    printf("A área da base do cilindro é: %.2f\n", area_de_base_cilindro(cilindro));
-    printf("O raio do cilindro é: %.2f\n", raio_do_cilindro(cilindro));
-    printf("O volume do cilindro é: %.2f\n", volume_do_cilindro(cilindro));
     printf("A altura do cilindro é: %.2f\n", altura_do_cilindro(cilindro));
+    printf("A área da base do cilindro é: %.2f\n", area_de_base_cilindro(cilindro));
+    printf("O volume do cilindro é: %.2f\n", volume_do_cilindro(cilindro));
 
     return 0;
 }

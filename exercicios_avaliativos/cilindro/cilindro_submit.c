@@ -4,13 +4,18 @@
 typedef struct
 {
     float altura;
-    float raio;
+    float base;
 } Cilindro;
+
+float altura_do_cilindro(Cilindro *cilindro);
+float area_de_base_cilindro(Cilindro *cilindro);
+float volume_do_cilindro(Cilindro *cilindro);
+
+Cilindro *cria_o_cilindro(float raio, float altura);
 
 float area_de_base_cilindro(Cilindro *cilindro)
 {
-    float PI = 3.14;
-    return PI * (cilindro->raio * cilindro->raio);
+    return cilindro->base;
 }
 
 float altura_do_cilindro(Cilindro *cilindro)
@@ -23,37 +28,37 @@ float volume_do_cilindro(Cilindro *cilindro)
     return altura_do_cilindro(cilindro) * area_de_base_cilindro(cilindro);
 }
 
-float raio_do_cilindro(Cilindro *cilindro)
-{
-    return cilindro->raio;
-}
-
-Cilindro *cria_o_cilindro(float raio, float altura)
+Cilindro *cria_o_cilindro(float altura, float base)
 {
     Cilindro *cilindro = malloc(sizeof(Cilindro));
-    cilindro->raio = raio;
     cilindro->altura = altura;
+    cilindro->base = base;
     return cilindro;
 }
 
 int main()
 {
-    float altura, raio;
-    Cilindro *cilindro;
+    int n;
+    scanf("%d", &n);
 
-    printf("Digite as dimensões do cilindro a ser criado\n");
-    printf("Altura: ");
-    scanf("%f", &altura);
-    printf("Raio: ");
-    scanf("%f", &raio);
+    Cilindro *cilindros = malloc(n * sizeof(Cilindro));
 
-    cilindro = cria_o_cilindro(raio, altura);
-    printf("(a) a altura; %.2f\n", altura_do_cilindro(cilindro));
-    printf("(b) o raio; %.2f\n", raio_do_cilindro(cilindro));
-    printf("(c) a área de sua base; %.2f\n", area_de_base_cilindro(cilindro));
-    printf("(d) o volume; %.2f\n", volume_do_cilindro(cilindro));
+    int index;
+    for (index = 0; index < n; index++)
+    {
+        float altura, raio;
 
-    free(cilindro);
+        scanf("%f %f", &altura, &raio);
+
+        cilindros[index] = *cria_o_cilindro(altura, raio);
+    }
+
+    for (index = 0; index < n; index++)
+    {
+        printf("%.2f %.2f %.2f", altura_do_cilindro(&cilindros[index]), area_de_base_cilindro(&cilindros[index]), volume_do_cilindro(&cilindros[index]));
+    }
+
+    free(cilindros);
 
     return 0;
 }
