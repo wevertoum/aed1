@@ -6,17 +6,17 @@ int main(){
     float altura, raio;
     Cilindro* cilindro;
 
-    printf("digite as dimensoes do cilindro a ser criado\n");
-    printf("Altura:");
-    scanf("%f",&altura);
-    printf("raio:");
-    scanf("%f",&raio);
+    printf("Digite as dimensões do cilindro a ser criado\n");
+    printf("Altura: ");
+    scanf("%f", &altura);
+    printf("Raio: ");
+    scanf("%f", &raio);
 
-    cilindro = cria_cilindro(raio,altura);
-    printf("A area da base do cilidro eh: %.2f\n",area_base_cilindro(cilindro));
-    printf("O raio do cilidro eh: %.2f\n",raio_cilindro(cilindro));
-    printf("O volume do cilidro eh: %.2f\n",volume_cilindro(cilindro));
-    printf("A altura do cilidro eh: %.2f\n",altura_cilindro(cilindro));
+    cilindro = criaCilindro(raio, altura);
+    printf("A área da base do cilindro é: %.2f\n", areaBaseCilindro(cilindro));
+    printf("O raio do cilindro é: %.2f\n", raioCilindro(cilindro));
+    printf("O volume do cilindro é: %.2f\n", volumeCilindro(cilindro));
+    printf("A altura do cilindro é: %.2f\n", alturaCilindro(cilindro));
 
     return 0;
 }
