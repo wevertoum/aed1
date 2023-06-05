@@ -2,23 +2,23 @@
 #include <stdlib.h>
 #define PI 3.14
 
-float areaBaseCilindro(Cilindro* cilindro){
+float area_de_base_cilindro(Cilindro* cilindro){
     return PI * (cilindro->raio * cilindro->raio);
 }
 
-float alturaCilindro(Cilindro* cilindro){
+float altura_do_cilindro(Cilindro* cilindro){
     return cilindro->altura;
 }
 
-float volumeCilindro(Cilindro* cilindro){
-    return alturaCilindro(cilindro) * areaBaseCilindro(cilindro);
+float volume_do_cilindro(Cilindro* cilindro){
+    return altura_do_cilindro(cilindro) * area_de_base_cilindro(cilindro);
 }
 
-float raioCilindro(Cilindro* cilindro){
+float raio_do_cilindro(Cilindro* cilindro){
     return cilindro->raio;
 }
 
-Cilindro* criaCilindro(float raio, float altura){
+Cilindro* cria_o_cilindro(float raio, float altura){
     Cilindro* cilindro = malloc(sizeof(Cilindro));
     cilindro->raio = raio;
     cilindro->altura = altura;

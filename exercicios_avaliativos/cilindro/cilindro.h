@@ -3,12 +3,12 @@ typedef struct{
     float raio;
 } Cilindro;
 
-float areaBaseCilindro(Cilindro* cilindro);
+float area_de_base_cilindro(Cilindro* cilindro);
 
-float alturaCilindro(Cilindro* cilindro);
+float altura_do_cilindro(Cilindro* cilindro);
 
-float volumeCilindro(Cilindro* cilindro);
+float volume_do_cilindro(Cilindro* cilindro);
 
-float raioCilindro(Cilindro* cilindro);
+float raio_do_cilindro(Cilindro* cilindro);
 
-Cilindro* criaCilindro(float raio, float altura);
+Cilindro* cria_o_cilindro(float raio, float altura);
