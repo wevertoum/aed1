@@ -3,32 +3,32 @@
 
 typedef struct
 {
-    float altura;
-    float base;
+    int altura;
+    int base;
 } Cilindro;
 
-float altura_do_cilindro(Cilindro *cilindro);
-float area_de_base_cilindro(Cilindro *cilindro);
-float volume_do_cilindro(Cilindro *cilindro);
+int altura_do_cilindro(Cilindro *cilindro);
+int base_do_cilindro(Cilindro *cilindro);
+int volume_do_cilindro(Cilindro *cilindro);
 
-Cilindro *cria_o_cilindro(float raio, float altura);
+Cilindro *cria_o_cilindro(int base, int altura);
 
-float area_de_base_cilindro(Cilindro *cilindro)
+int base_do_cilindro(Cilindro *cilindro)
 {
     return cilindro->base;
 }
 
-float altura_do_cilindro(Cilindro *cilindro)
+int altura_do_cilindro(Cilindro *cilindro)
 {
     return cilindro->altura;
 }
 
-float volume_do_cilindro(Cilindro *cilindro)
+int volume_do_cilindro(Cilindro *cilindro)
 {
-    return altura_do_cilindro(cilindro) * area_de_base_cilindro(cilindro);
+    return altura_do_cilindro(cilindro) * base_do_cilindro(cilindro);
 }
 
-Cilindro *cria_o_cilindro(float altura, float base)
+Cilindro *cria_o_cilindro(int altura, int base)
 {
     Cilindro *cilindro = malloc(sizeof(Cilindro));
     cilindro->altura = altura;
@@ -46,16 +46,16 @@ int main()
     int index;
     for (index = 0; index < n; index++)
     {
-        float altura, raio;
+        int altura, base;
 
-        scanf("%f %f", &altura, &raio);
+        scanf("%d %d", &altura, &base);
 
-        cilindros[index] = *cria_o_cilindro(altura, raio);
+        cilindros[index] = *cria_o_cilindro(altura, base);
     }
 
     for (index = 0; index < n; index++)
     {
-        printf("%.2f %.2f %.2f", altura_do_cilindro(&cilindros[index]), area_de_base_cilindro(&cilindros[index]), volume_do_cilindro(&cilindros[index]));
+        printf("%d %d %d\n", altura_do_cilindro(&cilindros[index]), base_do_cilindro(&cilindros[index]), volume_do_cilindro(&cilindros[index]));
     }
 
     free(cilindros);
