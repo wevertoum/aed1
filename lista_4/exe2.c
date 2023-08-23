@@ -47,13 +47,11 @@ int main()
 
     if (indexLoser != -1 && indexStealer != -1)
     {
-      // Atualizar a posição do jogador perdedor na lista
-      // para a posição do jogador que roubou a bola
+
       strcpy(players[indexLoser], players[indexStealer]);
     }
   }
 
-  // Encontrar o índice do jogador que começa como bobinho
   int currentIndex = -1;
   for (i = 0; i < numPlayers; i++)
   {
@@ -64,22 +62,17 @@ int main()
     }
   }
 
-  // Remover jogadores da roda até que reste apenas um
   while (numPlayers > 1)
   {
-    // O índice do jogador a ser removido
     int removeIndex = (currentIndex + numRoubadas - 1) % numPlayers;
 
-    // Imprimir o jogador que foi removido (opcional, para debug)
     printf("Removendo: %s\n", players[removeIndex]);
 
-    // Remover o jogador atual da roda
     for (i = removeIndex; i < numPlayers - 1; i++)
     {
       strcpy(players[i], players[i + 1]);
     }
 
-    // Atualizar o índice atual para o próximo jogador
     currentIndex = removeIndex % (numPlayers - 1);
 
     numPlayers--;
