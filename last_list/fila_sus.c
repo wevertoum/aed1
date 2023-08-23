@@ -1,93 +1,86 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-// Definição da estrutura da fila
-typedef struct Node
-{
-  int arrival_time;
-  int critical_time;
-  struct Node *next;
-} Node;
+#define MAX_PACIENTES 25
 
-typedef struct Queue
+typedef struct
 {
-  Node *front;
-  Node *rear;
-} Queue;
+  int H, M, C;
+} Paciente;
 
-// Inicialização da fila
-void initializeQueue(Queue *q)
+typedef struct
 {
-  q->front = q->rear = NULL;
+  Paciente data[MAX_PACIENTES];
+  int front, rear;
+} Fila;
+
+void initFila(Fila *fila)
+{
+  fila->front = 0;
+  fila->rear = -1;
 }
 
-// Inserção de um elemento na fila
-void enqueue(Queue *q, int arrival_time, int critical_time)
+void enqueue(Fila *fila, Paciente paciente)
 {
-  Node *newNode = (Node *)malloc(sizeof(Node));
-  newNode->arrival_time = arrival_time;
-  newNode->critical_time = critical_time;
-  newNode->next = NULL;
+  fila->rear++;
+  fila->data[fila->rear] = paciente;
+}
 
-  if (q->rear == NULL)
+Paciente dequeue(Fila *fila)
+{
+  if (fila->front > fila->rear)
   {
-    q->front = q->rear = newNode;
-    return;
+    Paciente emptyPaciente = {0, 0, 0};
+    return emptyPaciente; // Fila vazia
   }
-
-  q->rear->next = newNode;
-  q->rear = newNode;
+  Paciente paciente = fila->data[fila->front];
+  fila->front++;
+  return paciente;
 }
 
-// Remoção de um elemento da fila
-void dequeue(Queue *q)
+int isEmpty(Fila *fila)
 {
-  if (q->front == NULL)
-    return;
-
-  Node *temp = q->front;
-  q->front = q->front->next;
-
-  if (q->front == NULL)
-    q->rear = NULL;
-
-  free(temp);
+  return fila->front > fila->rear;
 }
 
 int main()
 {
+  Fila fila;
+  initFila(&fila);
+
   int N;
-  scanf("%d", &N); // Número de pacientes
-
-  Queue q;
-  initializeQueue(&q);
-
-  int critical_count = 0; // Contador de pacientes críticos
-
+  scanf("%d", &N);
   int i;
   for (i = 0; i < N; i++)
   {
-    int H, M, C;
-    scanf("%d %d %d", &H, &M, &C); // Hora, Minuto, Tempo até condição crítica
-    int arrival_time = H * 60 + M; // Converter hora e minuto para minutos
-    enqueue(&q, arrival_time, C);  // Inserir paciente na fila
+    Paciente paciente;
+    scanf("%d %d %d", &paciente.H, &paciente.M, &paciente.C);
+    enqueue(&fila, paciente);
   }
 
-  int current_time = 7 * 60; // Tempo de início do atendimento
-  while (q.front != NULL)
-  {
-    Node *current_patient = q.front;
+  int atendimento_hora = 7;
+  int atendimento_minuto = 0;
+  int pacientes_criticos = 0;
 
-    if (current_time >= current_patient->arrival_time && current_time <= current_patient->arrival_time + current_patient->critical_time)
+  while (!isEmpty(&fila))
+  {
+    Paciente paciente = dequeue(&fila);
+
+    int tempo_atual = (paciente.H - atendimento_hora) * 60 + (paciente.M - atendimento_minuto);
+
+    if (tempo_atual + paciente.C <= 0)
     {
-      critical_count++;
+      pacientes_criticos++;
     }
 
-    current_time = (current_patient->arrival_time + 30 <= current_time) ? current_time + 30 : current_patient->arrival_time + 30;
-    dequeue(&q); // Remover paciente da fila
+    atendimento_minuto += 30;
+    if (atendimento_minuto >= 60)
+    {
+      atendimento_hora++;
+      atendimento_minuto -= 60;
+    }
   }
 
-  printf("%d\n", critical_count);
+  printf("%d\n", pacientes_criticos);
 
   return 0;
 }

@@ -1,66 +1,90 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <string.h>
 
-struct Stack
+#define MAX_LENGTH 1000
+
+typedef struct
 {
-  char data;
-  struct Stack *next;
-};
+  char data[MAX_LENGTH];
+  int top;
+} Stack;
 
-typedef struct Stack Stack;
-
-Stack *createNode(char data)
+void initStack(Stack *stack)
 {
-  Stack *node = (Stack *)malloc(sizeof(Stack));
-  node->data = data;
-  node->next = NULL;
-  return node;
+  stack->top = -1;
 }
 
-void push(Stack **top, char data)
+void push(Stack *stack, char value)
 {
-  Stack *newNode = createNode(data);
-  newNode->next = *top;
-  *top = newNode;
+  stack->top++;
+  stack->data[stack->top] = value;
 }
 
-void pop(Stack **top)
+char pop(Stack *stack)
 {
-  if (*top == NULL)
-    return;
-  Stack *temp = *top;
-  *top = (*top)->next;
-  free(temp);
-}
-
-int areParenthesesBalanced(const char *expression)
-{
-  Stack *stack = NULL;
-  int i = 0;
-  while (expression[i] != '\0')
+  if (stack->top == -1)
   {
-    if (expression[i] == '(')
+    return '\0'; // Pilha vazia
+  }
+  char value = stack->data[stack->top];
+  stack->top--;
+  return value;
+}
+
+char peek(Stack *stack)
+{
+  if (stack->top == -1)
+  {
+    return '\0'; // Pilha vazia
+  }
+  return stack->data[stack->top];
+}
+
+int isEmpty(Stack *stack)
+{
+  return stack->top == -1;
+}
+
+char verifica_parenteses(const char *expressao)
+{
+  Stack stack;
+  initStack(&stack);
+  int i;
+  for (i = 0; expressao[i] != '\0'; i++)
+  {
+    if (expressao[i] == '(')
     {
       push(&stack, '(');
     }
-    else if (expression[i] == ')')
+    else if (expressao[i] == ')')
     {
-      if (stack == NULL)
-        return 0;
+      if (isEmpty(&stack))
+      {
+        return 'I'; // Incorreta
+      }
       pop(&stack);
     }
-    i++;
   }
 
-  return stack == NULL ? 1 : 0;
+  if (!isEmpty(&stack))
+  {
+    return 'I'; // Incorreta
+  }
+  else
+  {
+    return 'C'; // Correta
+  }
 }
 
 int main()
 {
-  char expression[1001];
-  printf("Digite a expressao: ");
-  scanf("%1000s", expression);
-  if (areParenthesesBalanced(expression))
+  char expressao[MAX_LENGTH];
+  fgets(expressao, sizeof(expressao), stdin);
+  expressao[strcspn(expressao, "\n")] = '\0'; // Remove o caractere de nova linha
+
+  char resultado = verifica_parenteses(expressao);
+
+  if (resultado == 'C')
   {
     printf("Correta\n");
   }

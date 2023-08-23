@@ -1,55 +1,110 @@
 #include <stdio.h>
-#include <stdlib.h>
+
+#define MAX_N 1000
+
+typedef struct
+{
+  int data[MAX_N];
+  int top;
+} Stack;
+
+void initStack(Stack *stack)
+{
+  stack->top = -1;
+}
+
+void push(Stack *stack, int value)
+{
+  stack->top++;
+  stack->data[stack->top] = value;
+}
+
+int pop(Stack *stack)
+{
+  int value = stack->data[stack->top];
+  stack->top--;
+  return value;
+}
 
 int main()
 {
   int n;
-  while (scanf("%d", &n) == 1 && n != 0)
+  int sequence[MAX_N];
+
+  while (1)
   {
-    int *permutation = (int *)malloc(n * sizeof(int));
-    for (int i = 0; i < n; i++)
+    scanf("%d", &n);
+    if (n == 0)
     {
-      scanf("%d", &permutation[i]);
+      break;
     }
 
-    int expected = 1;
-    int i = 0;
-    int top = -1;
-    int station[1000]; // Usando um array para simular a estação
-
-    while (i < n || top >= 0)
+    while (1)
     {
-      if (i < n && permutation[i] == expected)
+      int i1;
+      for (i1 = 0; i1 < n; i1++)
       {
-        expected++;
-        i++;
+        scanf("%d", &sequence[i1]);
       }
-      else if (top >= 0 && station[top] == expected)
-      {
-        expected++;
-        top--;
-      }
-      else if (i < n)
-      {
-        station[++top] = permutation[i];
-        i++;
-      }
-      else
+
+      if (sequence[0] == 0)
       {
         break;
       }
+
+      Stack station;
+      initStack(&station);
+      int expected = 1;
+      int possible = 1;
+
+      int i;
+      for (i = 0; i < n; i++)
+      {
+        while (station.top >= 0 && station.data[station.top] == expected)
+        {
+          pop(&station);
+          expected++;
+        }
+
+        if (sequence[i] == expected)
+        {
+          expected++;
+        }
+        else if (station.top >= 0 && station.data[station.top] < sequence[i])
+        {
+          possible = 0;
+        }
+        else
+        {
+          push(&station, sequence[i]);
+        }
+      }
+
+      while (station.top >= 0)
+      {
+        if (station.data[station.top] == expected)
+        {
+          pop(&station);
+          expected++;
+        }
+        else
+        {
+          possible = 0;
+          break;
+        }
+      }
+
+      if (possible)
+      {
+        printf("Yes\n");
+      }
+      else
+      {
+        printf("No\n");
+      }
     }
 
-    if (expected == n + 1)
-    {
-      printf("Yes\n");
-    }
-    else
-    {
-      printf("No\n");
-    }
-
-    free(permutation);
+    printf("\n");
   }
 
   return 0;
